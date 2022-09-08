@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <servicing></servicing>
+    <settings pass="windowsPE">
+        <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<SetupUILanguage>
+			<UILanguage>en-US</UILanguage>
+			</SetupUILanguage>
+			<InputLocale>0c09:00000409</InputLocale>
+			<SystemLocale>en-US</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UILanguageFallback>en-US</UILanguageFallback>
+			<UserLocale>nl-NL</UserLocale>
+        </component>
+        <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">     
+		<DiskConfiguration>
+			<WillShowUI>OnError</WillShowUI>
+			<Disk wcm:action="add">
+				<DiskID>0</DiskID>
+				<WillWipeDisk>true</WillWipeDisk>
+				<CreatePartitions>
+					<CreatePartition wcm:action="add">
+						<Order>1</Order>
+						<Size>1000</Size>
+						<Type>Primary</Type>
+					</CreatePartition>
+					<CreatePartition wcm:action="add">
+						<Order>2</Order>
+						<Size>100</Size>
+						<Type>EFI</Type>
+					</CreatePartition>
+					<CreatePartition wcm:action="add">
+						<Order>3</Order>
+						<Size>128</Size>
+						<Type>MSR</Type>
+					</CreatePartition>
+					<CreatePartition wcm:action="add">
+						<Order>4</Order>
+						<Extend>true</Extend>
+						<Type>Primary</Type>
+					</CreatePartition>
+				</CreatePartitions>
+				<ModifyPartitions>
+					<ModifyPartition wcm:action="add">
+						<Order>1</Order>
+						<PartitionID>1</PartitionID>
+						<Format>NTFS</Format>
+						<Label>WindowsRecovery</Label>
+						<TypeID>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC</TypeID>
+					</ModifyPartition>
+					<ModifyPartition wcm:action="add">
+						<Order>2</Order>
+						<PartitionID>2</PartitionID>
+						<Label>System</Label>
+						<!-- Do not modify system label, doing so breaks the answer file and 
+						windows fails autounattend install during partition and disk configuration! -->
+						<Format>FAT32</Format>
+					</ModifyPartition>
+					<ModifyPartition wcm:action="add">
+						<Order>3</Order>
+						<PartitionID>3</PartitionID>
+						<!-- No modification 
+						required on partition 3 -->
+					</ModifyPartition>
+					<ModifyPartition wcm:action="add">
+						<Order>4</Order>
+						<PartitionID>4</PartitionID>
+						<Letter>C</Letter>
+						<Label>Windows</Label>
+						<Format>NTFS</Format>
+					</ModifyPartition>
+				</ModifyPartitions>
+			</Disk>
+		</DiskConfiguration>
+		<ImageInstall>
+                <OSImage>
+                    <InstallFrom>
+                        <MetaData wcm:action="add">
+                            <Key>/IMAGE/NAME</Key>
+                            <Value>Windows 10 Enterprise</Value>
+                        </MetaData>
+                    </InstallFrom>
+                    <InstallTo>
+                        <DiskID>0</DiskID>
+                        <PartitionID>4</PartitionID>
+                    </InstallTo>
+					<WillShowUI>OnError</WillShowUI>
+                    <InstallToAvailablePartition>false</InstallToAvailablePartition>
+                </OSImage>
+        </ImageInstall>
+        <UserData>
+            <AcceptEula>true</AcceptEula>
+			<FullName>%organizationownername%</FullName>
+            <Organization>%organizationname%</Organization>
+			<ProductKey>
+				<Key>%windows10productkey%</Key>
+			</ProductKey>
+        </UserData>
+            <EnableFirewall>true</EnableFirewall>
+        </component>
+        <component name="Microsoft-Windows-PnpCustomizationsWinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DriverPaths>
+                <PathAndCredentials wcm:keyValue="3b3d2c70" wcm:action="add">
+                    <Path>E:\Program Files\VMware\VMware Tools\Drivers\pvscsi\Win8\amd64</Path>
+                </PathAndCredentials>
+            </DriverPaths>
+        </component>
+    </settings>
+    <settings pass="oobeSystem">
+		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<InputLocale>nl-NL</InputLocale>
+			<SystemLocale>en-US</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UILanguageFallback>en-US</UILanguageFallback>
+			<UserLocale>nl-NL</UserLocale>
+		</component>
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <UserAccounts>
+                <AdministratorPassword>
+                    <Value>%adminpassword%</Value>
+                    <PlainText>true</PlainText>
+                </AdministratorPassword>
+            </UserAccounts>
+            <TimeZone>W. Europe Standard Time</TimeZone>
+            <AutoLogon>
+                <Password>
+                    <Value>%adminpassword%</Value>
+                    <PlainText>true</PlainText>
+                </Password>
+                <LogonCount>1</LogonCount>
+                <Enabled>true</Enabled>
+                <Username>Administrator</Username>
+            </AutoLogon>
+            <OOBE>
+                <HideEULAPage>true</HideEULAPage>
+                <NetworkLocation>Work</NetworkLocation>
+                <ProtectYourPC>1</ProtectYourPC>
+                <HideLocalAccountScreen>true</HideLocalAccountScreen>
+                <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+                <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+            </OOBE>
+            <FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>PowerShell reg add "HKLM\System\CurrentControlSet\Control\Network\NewNetworkWindowOff"</CommandLine>
+                    <Description>Disable network window prompt when Windows first connects to a network.</Description>
+                    <Order>1</Order>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Description>Start WinRM service...</Description>
+                    <Order>2</Order>
+                    <CommandLine>cmd.exe /c net start winrm</CommandLine>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Description>Initialize the WinRM service to enable the packer provisioners phase</Description>
+                    <Order>3</Order>
+                    <CommandLine>powershell -ExecutionPolicy &quot;Bypass&quot; -File &quot;A:\000_Initialize-WinRM.ps1&quot;</CommandLine>
+                </SynchronousCommand>
+            </FirstLogonCommands>
+        </component>
+    </settings>
+    <settings pass="specialize">
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ComputerName>*</ComputerName>
+			<ProductKey>%windows10productkey%</ProductKey>
+			<RegisteredOrganization>%organizationname%</RegisteredOrganization>
+			<RegisteredOwner>%organizationownername%</RegisteredOwner>
+			<TimeZone>W. Europe Standard Time</TimeZone>
+		</component>
+		<component name="Microsoft-Windows-UnattendedJoin" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<Identification>
+				<JoinWorkgroup>WORKGROUP</JoinWorkgroup>
+			</Identification>
+		</component>	
+        <component name="Microsoft-Windows-TerminalServices-LocalSessionManager" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <fDenyTSConnections>false</fDenyTSConnections>
+        </component>
+        <component name="Networking-MPSSVC-Svc" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DomainProfile_EnableFirewall>true</DomainProfile_EnableFirewall>
+            <PrivateProfile_EnableFirewall>true</PrivateProfile_EnableFirewall>
+            <PublicProfile_EnableFirewall>true</PublicProfile_EnableFirewall>
+        </component>
+        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <RunSynchronous>
+                <RunSynchronousCommand wcm:action="add">
+                    <Path>E:\setup64.exe /s /v &quot;/qb REBOOT=R&quot;</Path>
+                    <WillReboot>Always</WillReboot>
+                    <Order>1</Order>
+                    <Description>Install VMware Tools in quiet basic mode</Description>
+                </RunSynchronousCommand>
+            </RunSynchronous>
+        </component>
+    </settings>
+</unattend>
