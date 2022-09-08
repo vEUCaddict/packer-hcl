@@ -25,7 +25,6 @@ set PACKER_LOG_PATH=D:\Git\packer\logs\%date:~3,2%-%date:~6,8%_%time:~0,2%.%time
 packer build -on-error=abort -var vm_name=W10X64ICGI00 -var imageowner=%username% -timestamp-ui -force --only vsphere-iso.windows-10 -var-file="W10ENT-VDI.pkrvars.hcl" .
 
 
-
 #### Build Windows 10 Enterprise VDI - App Volumes Capture VM ####
 cd d:\git\packer
 d:
