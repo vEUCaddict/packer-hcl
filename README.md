@@ -1,4 +1,5 @@
 Before you begin, please check the following:
+- Download packer.exe (https://www.packer.io/downloads) and packer-plugin-windows-update (https://github.com/rgl/packer-plugin-windows-update/releases) and place them in the root directory of this folder;
 - Placed the VMware Tools - ISO file on a vSphere Datastore and check the path in the correct variable;
 - Placed the Windows 10/11 - ISO file on the vSphere Datastore and check the path in the correct variable;
 - Change the values in the autounattend.xml files, which are marked between percentage signs %% and also the input-locale. The files can be found in: http > windows > 10/11;
