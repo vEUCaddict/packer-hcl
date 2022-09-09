@@ -1,4 +1,4 @@
-# WINDOWS 10 & 11 IMAGE CREATION WITH PACKER (HCL CODE LANGUAGE)
+# WINDOWS 10 & 11 IMAGE CREATION WITH PACKER (HCL2 CODE LANGUAGE)
 ## The fundatment of the images are based on the best practices of VMware, Microsoft and Citrix
 ### Do note when using the images for Microsoft and Citrix. My intention to start was for an VMware Horizon environment, so the focus is there.
 
