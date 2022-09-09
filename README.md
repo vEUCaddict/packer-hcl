@@ -1,4 +1,8 @@
-Before you begin, please check the following:
+# WINDOWS 10 & 11 IMAGE CREATION WITH PACKER (HCL CODE LANGUAGE)
+## The fundatment of the images are based on the best practices of VMware, Microsoft and Citrix
+### Do note when using the images for Microsoft and Citrix. My intention to start was for an VMware Horizon environment, so the focus is there.
+
+### Before you begin, please check the following:
 - Download packer.exe (https://www.packer.io/downloads) and packer-plugin-windows-update (https://github.com/rgl/packer-plugin-windows-update/releases) and place them in the root directory of this folder;
 - Place the VMware Tools - ISO file on a vSphere Datastore and check the path in the correct variable;
 - Place the Windows 10/11 - ISO file on the vSphere Datastore and check the path in the correct variable;
@@ -7,13 +11,13 @@ Before you begin, please check the following:
 - Filled-in all variables in the *.pkvars.hcl files, do also check the *.pkr.hcl files;
 - You have an DFS/CIFS/SMB share available to function as a repository for your imaging software and configuration files. Take care that your folder names matches the variable names and this means also for the executables.
 
-Tips
+### Tips
 - Just a friendly note, this setup works out for me and is intended for multi-environment (cloud) scenarios.
 - If you delete hcl files in the root directory, it can be that certain variables are declared, but not used anymore. An error will be raised while running the packer.exe command!
 - Windows 11 App Volumes Image is not yet created...
 - For any questions or recommendations, please leave a message.
 
-
+### Commands
 Commands to run in a command prompt. Copy them line by line (not all together at once!).
 In my setup the packer.exe and scripts are placed on D:\Git\packer, please do change to your own setup.
 Change the vm_name variable to a name which suits you best.
