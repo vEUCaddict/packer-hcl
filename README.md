@@ -18,32 +18,37 @@ Change the vm_name variable to a name which suits you best.
 
 
 #### Build Windows 10 Enterprise - VDI Master Image ####
+```
 cd d:\git\packer
 d:
 set PACKER_LOG=1
 set PACKER_LOG_PATH=D:\Git\packer\logs\%date:~3,2%-%date:~6,8%_%time:~0,2%.%time:~3,2%_packer_build_w10ent_vdi.log
 packer build -on-error=abort -var vm_name=W10X64ICGI00 -var imageowner=%username% -timestamp-ui -force --only vsphere-iso.windows-10 -var-file="W10ENT-VDI.pkrvars.hcl" .
-
+```
 
 #### Build Windows 10 Enterprise VDI - App Volumes Capture VM ####
+```
 cd d:\git\packer
 d:
 set PACKER_LOG=1
 set PACKER_LOG_PATH=D:\Git\packer\logs\%date:~3,2%-%date:~6,8%_%time:~0,2%.%time:~3,2%_packer_build_w10ent_appvolcap.log
 packer build -on-error=abort -var vm_name=W10X64AVCAP00 -var imageowner=%username% -timestamp-ui -force --only vsphere-iso.windows-10-appvolcap -var-file="W10ENT-APPVOLCAP.pkrvars.hcl" .
-
+```
 
 #### Build Windows 11 Enterprise - VDI Master Image ####
+```
 cd d:\git\packer
 d:
 set PACKER_LOG=1
 set PACKER_LOG_PATH=D:\Git\packer\logs\%date:~3,2%-%date:~6,8%_%time:~0,2%.%time:~3,2%_packer_build_w11ent_vdi.log
 packer build -on-error=abort -var vm_name=W11X64ICGI00 -var imageowner=%username% -timestamp-ui -force --only vsphere-iso.windows-11 -var-file="W11ENT-VDI.pkrvars.hcl" .
-
+```
 
 #### Build Windows 10 Enterprise Multi-session - VDI Master Image on Azure ####
+```
 cd d:\git\packer
 d:
 set PACKER_LOG=1
 set PACKER_LOG_PATH=D:\Git\packer\logs\%date:~3,2%-%date:~6,8%_%time:~0,2%.%time:~3,2%_packer_build_w10ent_vdi_azure.log
 packer build -on-error=abort -var azure_temp_compute_name=W10MSPKGRTMP -var azure_shared_image_gallery_image_version=1.0.0 -timestamp-ui -force --only azure-arm.windows-10-vdi -var-file="W10ENT-VDI-AVD-AZURE.pkrvars.hcl" .
+```
